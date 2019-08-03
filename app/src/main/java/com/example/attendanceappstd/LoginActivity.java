@@ -1,8 +1,6 @@
 package com.example.attendanceappstd;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,12 +9,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 EditText mETEmail, mETPassword;
 TextView mTVSignup,mTVForgetPassword;
 Button mBtnLogin;
@@ -26,21 +27,28 @@ FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         auth=FirebaseAuth.getInstance();
 
         if (auth.getCurrentUser()!=null){
-            startActivity(new Intent(MainActivity.this,SignUpActivity.class));
+            startActivity(new Intent(LoginActivity.this,DashboardActivity.class));
             finish();
         }
-        mETEmail=findViewById(R.id.et_email);
-        mETPassword=findViewById(R.id.et_password);
-        mTVSignup=findViewById(R.id.tv_signup);
-        mTVForgetPassword=findViewById(R.id.tv_forget_password);
-        mBtnLogin=findViewById(R.id.btn_login);
+        mETEmail=(EditText)findViewById(R.id.et_email);
+        mETPassword=(EditText)findViewById(R.id.et_password);
+        mTVSignup=(TextView) findViewById(R.id.tv_signup);
+        mTVForgetPassword=(TextView) findViewById(R.id.tv_forget_password);
+        mBtnLogin=(Button) findViewById(R.id.btn_login);
 
 
-
+        mTVSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signUPIntent = new Intent(LoginActivity.this, SignUpActivity.class);
+                startActivity(signUPIntent);
+                finish();
+            }
+        });
         mBtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,21 +66,21 @@ FirebaseAuth auth;
                 }
 
                 auth.signInWithEmailAndPassword(mStrEmail, mStrPassword)
-                        .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
 
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful())
                                 {
-                                    Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                                    Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                                     startActivity(intent);
                                     finish();
 
-                                    Toast.makeText(MainActivity.this,"Login Successful",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(LoginActivity.this,"Login Successful",Toast.LENGTH_LONG).show();
                                 }
 
                                 else {
-                                    Toast.makeText(MainActivity.this, "Login Failed: "+task.getException(), Toast.LENGTH_LONG).show();
+                                    Toast.makeText(LoginActivity.this, "Login Failed: "+task.getException(), Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
