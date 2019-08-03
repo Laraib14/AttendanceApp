@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">AttendanceAppStd</string>
+    <string name="attendance_student">Attendance Student</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="signup_here">Signup Here</string>
+    <string name="forget_password">Forget Password?</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="sign_Up">SIGN UP</string>
+    <string name="go_to_login">Go to Login</string>
+    <string name="loginTV">LOGIN</string>
+</resources>
