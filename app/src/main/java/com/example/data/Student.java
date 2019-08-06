@@ -2,7 +2,9 @@ package com.example.data;
 
 public class Student {
 
+public Student(){
 
+}
     private String userID;
     private String status;
     private String currentDate;
