@@ -52,7 +52,7 @@ DatabaseReference myRef;
         myRef.child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                Log.d(">>>a",dataSnapshot+"");
+//                Log.d(">>>a",donCreateataSnapshot+"");
 //                Log.d(">>>b",dataSnapshot.toString());
                 for(DataSnapshot datas: dataSnapshot.getChildren()){
                     Student user=datas.getValue(Student.class);

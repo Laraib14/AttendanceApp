@@ -26,7 +26,7 @@ import java.util.Locale;
 
 public class DashboardActivity extends AppCompatActivity {
 TextView date;
-Button buttonPresent, buttonLeave,view_all;
+Button buttonPresent, buttonLeave,view_all, profile;
 FirebaseAuth auth;
 FirebaseDatabase database;
 DatabaseReference myRef;
@@ -46,8 +46,17 @@ DatabaseReference myRef;
         buttonPresent=(Button) findViewById(R.id.buttonPresent);
         buttonLeave=(Button) findViewById(R.id.buttonLeave);
         view_all=(Button) findViewById(R.id.view_all);
+        profile = (Button)findViewById(R.id.profile);
+
         date.setText(date_current);
         updateUI();
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signUPIntent = new Intent(DashboardActivity.this, ProfileActivity.class);
+                startActivity(signUPIntent);
+            }
+        });
         buttonPresent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
